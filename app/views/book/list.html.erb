@@ -1,0 +1,26 @@
+<% if @books.blank? %>
+  <p> There are no books to display </p>
+<% else %>
+  <p> Thre are the list of books</p>
+  <ul id="books_list">
+    <% @books.each  do |c| %>
+      <li>
+        <%= link_to c.title, {:action => 'show', :id => c.id} -%>
+        <%= link_to 'Edit', {:action => 'edit', :id => c.id} %>
+        <%= link_to 'Delete', {:action => 'delete', :id => c.id} %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<br/><h2> List of subjects</h2>
+
+<ul>
+  <% @subjects.each do |subject| %>
+  <li>
+    <%= link_to subject.name, {:action => 'show_subjects' , :id => subject.id} %>
+  </li>
+  <%end %>
+</ul>
+
+<p> <%= link_to "Add new Book", {:action => 'new'} %></p>

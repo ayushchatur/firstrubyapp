@@ -15,9 +15,12 @@ ActiveRecord::Schema.define(version: 2021_06_17_023440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "books", force: :cascade do |t|
+  create_table "books", id: :serial, force: :cascade do |t|
+    t.string "title", limit: 32, null: false
+    t.integer "price", null: false
+    t.integer "subject_id", null: false
+    t.text "description", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "subjects", force: :cascade do |t|

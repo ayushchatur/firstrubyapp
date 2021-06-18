@@ -1,0 +1,12 @@
+<% if @book.blank? %>
+  <p> There are no books to display </p>
+<% else %>
+  <label for="book_title">Title</label>:<%= @book.title %><br/>
+  <label for="book_price">Price</label>:<%= @book.price %><br/>
+  <label for="book_description">Description</label>:<%= @book.description %><br/>
+  <label for="book_subject_id">Subject</label>:
+  <%= link_to @book.subject.name, :action => 'show_subjects', :id => @book.subject.id %><br/>
+  <label for="book_">id</label>:<%= @book.id %><br/>
+<% end %>
+<p> <%= link_to "Add new Book", {:action => 'new'} %></p>
+<p> <%= link_to "Back to list", {:action => 'list'} %></p>

@@ -1,6 +1,8 @@
 class BookController < ApplicationController
+  layout 'standard'
   def list
     @books = Book.all
+    @subjects = Subject.all
   end
 
   def show
@@ -27,11 +29,32 @@ class BookController < ApplicationController
     params.require(:books).permit(:title, :price, :subject_id, :description)
   end
   def edit
+    @book = Book.find(params[:id])
+    @subjects = Subject.all
   end
 
   def update
+    @book = Book.find(params[:id])
+
+    if @book.update_attributes(book_param)
+      redirect_to :action => 'show', :id => @book
+
+    else
+      @subjects = Subject.all
+      render :action => 'edit'
+    end
   end
 
+  def book_param
+    params.require(:book).permit(:title, :price, :subject_id, :description)
+  end
   def delete
+    Book.find(params[:id]).destroy
+    redirect_to :action => 'list'
+  end
+  def show_subjects
+    @subject = Subject.find(params[:id])
+    @books = Book.where(subject_id: @subject.id)
+    @abnc = Book.all
   end
 end
