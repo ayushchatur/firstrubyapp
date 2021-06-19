@@ -55,6 +55,6 @@ class BookController < ApplicationController
   def show_subjects
     @subject = Subject.find(params[:id])
     @books = Book.where(subject_id: @subject.id)
-    @abnc = Book.all
+    # @abnc = Book.all
   end
 end
